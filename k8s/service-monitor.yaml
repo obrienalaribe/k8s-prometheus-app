@@ -1,0 +1,21 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: swagger
+  namespace: monitoring
+  labels:
+    app: swagger
+spec:
+  selector:
+    matchLabels:
+      app: swagger
+  endpoints:
+  - port: http
+    interval: 10s
+    scheme: http
+    path: '/swagger-stats/metrics'
+    honorLabels: true
+  namespaceSelector:
+    matchNames:
+    - swagger
+    - monitoring
